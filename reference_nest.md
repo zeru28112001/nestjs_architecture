@@ -79,8 +79,13 @@ src/modules/[feature-name]/
     └── dto/
 ```
 
-> **Note on Complex Features with Multiple Subtypes (e.g. `orders` having `digital` & `smm`)**:
-> If a domain has distinct product types or fulfillment engines (like `digital` licenses vs external `smm` APIs), they are nested **inside** their respective role directory (e.g., `admin/digital/`, `admin/smm/`, `user/digital/`, `user/smm/`), preserving Role as the primary boundary.
+> **Note on Complex Features with Sub-Resources or Subtypes**:
+> If a domain contains distinct sub-resources or fulfillment engines (e.g. `orders` having `digital` & `smm`, `catalog` having `categories` & `products`, or `smm` having `providers` & `services`), they are nested **inside** their respective role directory, preserving Role as the primary boundary:
+> * `catalog/admin/categories/` & `catalog/admin/products/`
+> * `catalog/user/categories/` & `catalog/user/products/`
+> * `smm/admin/providers/` & `smm/admin/services/`
+> * `orders/admin/digital/` & `orders/admin/smm/`
+> * `orders/user/digital/` & `orders/user/smm/`
 
 ### Why Role-First Separation is Required:
 1. **Isolated RBAC & Security Boundaries**: Admin controllers and services remain completely separated from customer endpoints. Admin routes use `@Roles('ADMIN')` and `@UseGuards(JwtAuthGuard, RolesGuard)`, while customer routes only require user JWT tokens.
