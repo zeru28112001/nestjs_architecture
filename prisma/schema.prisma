@@ -1,13 +1,12 @@
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider = "prisma-client-js"
 }
 
-enum Role {
+datasource db {
+  provider = "postgresql"
+}
+
+enum UserRole {
   ADMIN
   USER
   SHOP
@@ -18,7 +17,7 @@ model User {
   email        String        @unique
   passwordHash String
   name         String?
-  role         Role          @default(USER)
+  role         UserRole      @default(USER)
   isActive     Boolean       @default(true)
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
@@ -57,4 +56,3 @@ model ExampleDomain {
 
   @@map("example_domains")
 }
-
