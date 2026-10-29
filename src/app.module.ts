@@ -4,6 +4,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { validateEnv } from './config/env.schema.js';
 import { PrismaModule } from './shared/prisma/prisma.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
+import { UsersModule } from './modules/users/users.module.js';
 import { ExampleItemModule } from './modules/example-item/example-item.module.js';
 import { ExampleDomainModule } from './modules/example-domain/example-domain.module.js';
 
@@ -25,9 +26,9 @@ import { ExampleDomainModule } from './modules/example-domain/example-domain.mod
     }),
     PrismaModule,
     AuthModule,
+    UsersModule,
     ExampleItemModule,
     ExampleDomainModule,
   ],
 })
 export class AppModule {}
-
